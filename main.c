@@ -15,6 +15,7 @@
 
 
 void PrintArray(int *arr, int n){
+    return;
     for (int i = 0; i<n; i++){
         printf("%d ", arr[i]);
     }
@@ -25,6 +26,25 @@ void RandArr(int *arr, int size){
     int i;
     for (i = 0; i < size; i++){
         arr[i] = rand();
+    }
+}
+
+void RandArrHalf(int *arr, int size){
+    int i = size / 2;
+    for (i ; i < size; i++){
+        arr[i] = rand();
+    }
+}
+
+void Reverce(int *arr, int size){
+    int i;
+    int halfsize = size / 2;
+    for (i = 0 ; i < halfsize; i++){
+        int buf = arr[i];
+        int j = size - i - 1;
+        arr[i] = arr[j];
+        arr[j] = buf;
+
     }
 }
 
@@ -80,18 +100,20 @@ int main() {
     printf("Len of arr: ");
     scanf("%d", &n);
 
+    printf("\n Random\n");
+
     int *arr1 = malloc(n * sizeof(int));
     printf("Fill... \n");
     RandArr (arr1, n);
     printf("Filled. \n");
-    //PrintArray (arr1, n);
+    PrintArray (arr1, n); //Вывод
 
     
     int *arr2 = malloc(n * sizeof(int));
     printf("Copy... \n");
     CopyArr(arr1, arr2, n);
     printf("Copied. \n");
-    //PrintArray(arr2, n);
+    PrintArray(arr2, n); //Вывод
 
 
     printf("Sort by selection sort...\n");
@@ -100,6 +122,7 @@ int main() {
     time_end = clock() - time_start;
     printf("Sorted by selection sort.\n");
     printf("%d ms\n", time_end * 1000 / CLOCKS_PER_SEC);
+    PrintArray (arr1, n); //Вывод
 
     printf("Sort by comb sort...\n");
     time_start = clock();
@@ -107,6 +130,66 @@ int main() {
     time_end = clock() - time_start;    
     printf("Sorted by comb sort.\n");
     printf("%d ms\n", time_end * 1000 / CLOCKS_PER_SEC);
+    PrintArray (arr2, n); //Вывод
+
+    //Частично отсортированно
+    printf("\n Partially sorted\n");
+
+    printf("Overwriting a half...\n");
+    RandArrHalf(arr1, n);
+    printf("Half overwritten...\n");
+    PrintArray (arr1, n); //Вывод
+
+    printf("Copy... \n");
+    CopyArr(arr1, arr2, n);
+    printf("Copied. \n");
+    PrintArray(arr2, n); //Вывод
+
+    printf("Sort by selection sort...\n");
+    time_start = clock();
+    SelectionSort(arr1, n);
+    time_end = clock() - time_start;
+    printf("Sorted by selection sort.\n");
+    printf("%d ms\n", time_end * 1000 / CLOCKS_PER_SEC);
+    PrintArray (arr1, n); //Вывод
+
+    printf("Sort by comb sort...\n");
+    time_start = clock();
+    CombSort(arr2, n);
+    time_end = clock() - time_start;    
+    printf("Sorted by comb sort.\n");
+    printf("%d ms\n", time_end * 1000 / CLOCKS_PER_SEC);
+    PrintArray (arr2, n); //Вывод
+
+    //Обратно отсортированно
+    printf("\n Reverce sorted\n");
+
+    printf("Reversing...\n");
+    Reverce(arr1, n);
+    printf("Reversed...\n");
+    PrintArray (arr1, n); //Вывод
+
+    printf("Copy... \n");
+    CopyArr(arr1, arr2, n);
+    printf("Copied. \n");
+    PrintArray(arr2, n); //Вывод
+
+    printf("Sort by selection sort...\n");
+    time_start = clock();
+    SelectionSort(arr1, n);
+    time_end = clock() - time_start;
+    printf("Sorted by selection sort.\n");
+    printf("%d ms\n", time_end * 1000 / CLOCKS_PER_SEC);
+    PrintArray (arr1, n); //Вывод
+
+    printf("Sort by comb sort...\n");
+    time_start = clock();
+    CombSort(arr2, n);
+    time_end = clock() - time_start;    
+    printf("Sorted by comb sort.\n");
+    printf("%d ms\n", time_end * 1000 / CLOCKS_PER_SEC);
+    PrintArray (arr2, n); //Вывод
+
 
 
 
